@@ -11,7 +11,7 @@ import javax.swing.border.Border;
  *
  * @author augusto
  */
-public class SwingComponentFactory extends ar.com.huargo.swingtoolkit.SwingComponentFactory2 {
+public class SwingComponentFactory extends ar.com.huargo.swingtoolkit.SwingComponentFactory {
     
     protected static final int DEFAULT_BORDER_LENGTH = 1;
     

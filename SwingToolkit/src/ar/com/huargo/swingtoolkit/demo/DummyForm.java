@@ -5,6 +5,7 @@
 package ar.com.huargo.swingtoolkit.demo;
 
 import ar.com.huargo.swingtoolkit.GenericFormWindow;
+import ar.com.huargo.swingtoolkit.factory.JLabelFactory;
 
 /**
  *
@@ -19,12 +20,15 @@ public class DummyForm extends GenericFormWindow{
     
     @Override
     protected void addComponents() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.contentPanel.add(JLabelFactory.createJLabel("234", 0));
+        this.contentPanel.add(JLabelFactory.createJLabel("234", 0));
+        this.contentPanel.add(JLabelFactory.createJLabel("234", 1));
+        this.contentPanel.add(JLabelFactory.createJLabel("234", 1));
     }
 
     @Override
     protected boolean validateFields() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
     
 }
