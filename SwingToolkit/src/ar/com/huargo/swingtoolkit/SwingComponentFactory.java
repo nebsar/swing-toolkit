@@ -41,13 +41,21 @@ public class SwingComponentFactory {
 	 * @param bounds
 	 * @return
 	 */
-	public static JLabel createJLabel(String text, int...bounds){
+	public static JLabel createJLabel(String text, Rectangle bounds){
 		JLabel result = new JLabel(text);
-		if((bounds != null) && (bounds.length == 4)){
-			result.setBounds(SwingComponentFactory.createRectangle(bounds));
-		}
+		result.setBounds(bounds);
 		return result;
 	}
+        
+        
+        /* ********************************************************************************************************************* */
+        
+        /*
+         * 
+         */
+        public static JLabel createJLabel(String text, int border){
+            JLabel result
+        }
 	
 	/* ********************************************************************************************************************* */
 

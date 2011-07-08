@@ -4,7 +4,6 @@
  */
 package ar.com.huargo.swingtoolkit;
 
-import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

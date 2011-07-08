@@ -4,7 +4,11 @@
  */
 package ar.com.huargo.swingtoolkit;
 
+import ar.com.huargo.swingtoolkit.factory.JButtonFactory;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -49,13 +53,29 @@ public abstract class GenericFormWindow extends GenericWindow{
     }
     
     protected void createButtonsPanel(){
-//        this.buttonsPanel = new JPanel();
-        this.buttonsPanel = SwingComponentFactory.createJPanel();
-        this.buttonsPanel.setLayout(new GridLayout(0,2));
-        this.createConfirmButton();
-        this.createCancelButton();
-        this.buttonsPanel.add(this.confirmButton);
-        this.buttonsPanel.add(this.cancelButton);
+        this.buttonsPanel = new JPanel();
+//        this.buttonsPanel = SwingComponentFactory2.createJPanel();
+//        this.buttonsPanel.setLayout(new GridLayout(0, 2));
+        
+        GridBagLayout gblayout = new GridBagLayout();
+        GridBagConstraints gcconstraints = new GridBagConstraints();
+        gblayout.columnWidths= new int[]{100,100,100};
+        gcconstraints.fill = GridBagConstraints.BOTH;
+        gcconstraints.weightx = 0;
+        this.buttonsPanel.add(JButtonFactory.createJButton("Confirm", gblayout, gcconstraints));
+        this.buttonsPanel.add(JButtonFactory.createJButton("Cancel", gblayout, gcconstraints));
+        this.buttonsPanel.add(JButtonFactory.createJButton("Culo", gblayout, gcconstraints));
+        
+        gcconstraints.gridwidth = GridBagConstraints.REMAINDER;
+        
+        this.buttonsPanel.setSize(500, 500);
+        this.contentPanel.setMinimumSize(new Dimension(500, 500));
+        this.jFrame.setMinimumSize(new Dimension(500, 500));
+//        
+//        this.createConfirmButton();
+//        this.createCancelButton();
+//        this.buttonsPanel.add(this.confirmButton);
+//        this.buttonsPanel.add(this.cancelButton);
     }
     
     protected LayoutManager getContentPanelLayout(){
