@@ -4,6 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit;
 
+import ar.com.huargo.swingtoolkit.factory.JPanelFactory;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -51,7 +52,7 @@ public abstract class GenericWindow {
     }
     
     private void createContainerPanel(){
-        this.containerPanel = SwingComponentFactory.createJPanel();
+        this.containerPanel = JPanelFactory.createJPanel();
         this.containerPanel.setBorder(this.getBorder());
         this.initializeContainerPanel();
     }

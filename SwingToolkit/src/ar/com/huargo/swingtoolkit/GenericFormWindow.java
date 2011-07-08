@@ -4,16 +4,13 @@
  */
 package ar.com.huargo.swingtoolkit;
 
-import ar.com.huargo.swingtoolkit.factory.JButtonFactory;
+import ar.com.huargo.swingtoolkit.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -55,17 +52,15 @@ public abstract class GenericFormWindow extends GenericWindow{
     
     protected void createButtonsPanel(){
         this.buttonsPanel = new JPanel();
+        this.buttonsPanel.setLayout(new FlowLayout());
         
-        this.buttonsPanel.add(JButtonFactory.createJButton("Confirm", gblayout, gcconstraints));
-        this.buttonsPanel.add(Box.createRigidArea(new Dimension(20,0)));
-        this.buttonsPanel.add(JButtonFactory.createJButton("Cancel", gblayout, gcconstraints));
+        this.createConfirmButton();
+        this.createCancelButton();
         
-        this.buttonsPanel.setSize(500, 500);
-        this.jFrame.setLayout(gblayout);
-//        this.createConfirmButton();
-//        this.createCancelButton();
-//        this.buttonsPanel.add(this.confirmButton);
-//        this.buttonsPanel.add(this.cancelButton);
+        this.buttonsPanel.add(this.confirmButton);
+        this.buttonsPanel.add(SwingComponentFactory.createHorizontalSeparator());
+        this.buttonsPanel.add(this.cancelButton);
+        
     }
     
     protected LayoutManager getContentPanelLayout(){
