@@ -108,12 +108,16 @@ public abstract class GenericFormWindow extends GenericWindow{
     
     
     protected void addLine(JLabel label, Component component){
+        this.addLine(label, component,this.gridBagConstraints);
+    }
+    
+    protected void addLine(JLabel label, Component component, Object contrainsts){
         this.gridBagConstraints.gridwidth = GridBagConstraints.RELATIVE;
         GridBagLayoutUtil.add(label, this.gridBagLayout, this.gridBagConstraints);
         this.contentPanel.add(label);
         this.gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
         GridBagLayoutUtil.add(component, this.gridBagLayout, this.gridBagConstraints);
-        this.contentPanel.add(component);
+        this.contentPanel.add(component);       
     }
     
     
