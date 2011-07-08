@@ -4,6 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit.factory;
 
+import java.awt.Component;
 import javax.swing.JLabel;
 
 /**
@@ -21,6 +22,12 @@ public class JLabelFactory extends SwingComponentFactory{
         JLabel label = JLabelFactory.createJLabel(text);
         label.setBorder(SwingComponentFactory.createBorder(borderLength));
         return label;
+    }
+    
+    public static JLabel createJLabel(String text, Component component){
+        JLabel jlabel = new JLabel(text);
+        jlabel.setLabelFor(component);
+        return jlabel;
     }
     
 }
