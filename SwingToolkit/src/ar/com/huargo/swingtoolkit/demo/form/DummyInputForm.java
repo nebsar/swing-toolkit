@@ -32,7 +32,7 @@ public class DummyInputForm extends GenericFormWindow{
         this.addLine(lastnameLabel, lastnameField);
      
     }
-
+    
     @Override
     protected boolean validateFields() {
         throw new UnsupportedOperationException("Not supported yet.");
