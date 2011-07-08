@@ -37,6 +37,7 @@ public abstract class GenericFormWindow extends GenericWindow{
         this.createContentPanel();
         this.createButtonsPanel();
         this.containerPanel.add(this.contentPanel,BorderLayout.NORTH);
+        this.containerPanel.add(SwingComponentFactory.createVerticalSeparator());
         this.containerPanel.add(this.buttonsPanel,BorderLayout.SOUTH);
     }
     
