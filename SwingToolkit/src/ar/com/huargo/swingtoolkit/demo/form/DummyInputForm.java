@@ -4,7 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit.demo.form;
 
-import ar.com.huargo.swingtoolkit.GenericFormWindow;
+import ar.com.huargo.swingtoolkit.form.GenericFormWindow;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
