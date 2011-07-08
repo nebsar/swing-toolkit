@@ -1,4 +1,4 @@
-#Welcome to swing-toolkit
+#summary Welcome to swing-toolkit
 = Introduction =
 
 
