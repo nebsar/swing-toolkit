@@ -4,16 +4,16 @@
  */
 package ar.com.huargo.swingtoolkit.test.form;
 
-import ar.com.huargo.swingtoolkit.demo.form.DummyForm;
+import ar.com.huargo.swingtoolkit.demo.form.DummyInputForm;
 
 /**
  *
- * @author augusto
+ * @author arecordon
  */
-public class TestForm {
-    
-    
+public class TestInputForm{
+
     public static void main(String[] args){
-        new DummyForm("Title");
+        new DummyInputForm("Test Input");
     }
+    
 }

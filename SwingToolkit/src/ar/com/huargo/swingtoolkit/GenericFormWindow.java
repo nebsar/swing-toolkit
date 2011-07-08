@@ -7,6 +7,8 @@ package ar.com.huargo.swingtoolkit;
 import ar.com.huargo.swingtoolkit.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -31,6 +33,10 @@ public abstract class GenericFormWindow extends GenericWindow{
     protected JButton cancelButton;
     
     protected JButton confirmButton;
+    
+    protected GridBagLayout gridBagLayout;
+    
+    protected GridBagConstraints gridBagConstraints;
 
     @Override
     protected void initializeContainerPanel() {
@@ -47,7 +53,14 @@ public abstract class GenericFormWindow extends GenericWindow{
     
     protected void createContentPanel(){
         this.contentPanel = new JPanel();
-        this.contentPanel.setLayout(this.getContentPanelLayout());
+        
+        this.gridBagLayout = new GridBagLayout();
+        this.gridBagConstraints = new GridBagConstraints();
+        this.containerPanel.setLayout(this.gridBagLayout);
+        this.gridBagConstraints.fill = GridBagConstraints.BOTH;
+//        this.gridBagConstraints.weightx = 1.0;
+        
+        
         this.addComponents();
     }
     
