@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -54,24 +55,13 @@ public abstract class GenericFormWindow extends GenericWindow{
     
     protected void createButtonsPanel(){
         this.buttonsPanel = new JPanel();
-//        this.buttonsPanel = SwingComponentFactory2.createJPanel();
-//        this.buttonsPanel.setLayout(new GridLayout(0, 2));
         
-        GridBagLayout gblayout = new GridBagLayout();
-        GridBagConstraints gcconstraints = new GridBagConstraints();
-        gblayout.columnWidths= new int[]{100,100,100};
-        gcconstraints.fill = GridBagConstraints.BOTH;
-        gcconstraints.weightx = 0;
         this.buttonsPanel.add(JButtonFactory.createJButton("Confirm", gblayout, gcconstraints));
+        this.buttonsPanel.add(Box.createRigidArea(new Dimension(20,0)));
         this.buttonsPanel.add(JButtonFactory.createJButton("Cancel", gblayout, gcconstraints));
-        this.buttonsPanel.add(JButtonFactory.createJButton("Culo", gblayout, gcconstraints));
-        
-        gcconstraints.gridwidth = GridBagConstraints.REMAINDER;
         
         this.buttonsPanel.setSize(500, 500);
-        this.contentPanel.setMinimumSize(new Dimension(500, 500));
-        this.jFrame.setMinimumSize(new Dimension(500, 500));
-//        
+        this.jFrame.setLayout(gblayout);
 //        this.createConfirmButton();
 //        this.createCancelButton();
 //        this.buttonsPanel.add(this.confirmButton);
