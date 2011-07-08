@@ -1,7 +1,5 @@
-Welcome to swing-toolkit.
-
-# Welcome to swing-toolkit
 = Introduction =
+# Welcome to swing-toolkit
 
 SwingToolkit is a small framework, or toolkit, designed to help Java developers to handle Swing Windows, through a serie of classes, templates, that provide an out of the box solution for easy creation of forms and windows, panels, etc.
 
