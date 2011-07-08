@@ -26,10 +26,11 @@ public class DummyInputForm extends GenericFormWindow{
         
         JTextField lastnameField = new JTextField(20);
         JLabel lastnameLabel = new JLabel("Last Name");
-        this.contentPanel.add(nameLabel);
-        this.contentPanel.add(nameField);
-        this.contentPanel.add(lastnameLabel);
-        this.contentPanel.add(lastnameField);
+        lastnameLabel.setLabelFor(lastnameField);
+        
+        this.addLine(nameLabel, nameField);
+        this.addLine(lastnameLabel, lastnameField);
+     
     }
 
     @Override
