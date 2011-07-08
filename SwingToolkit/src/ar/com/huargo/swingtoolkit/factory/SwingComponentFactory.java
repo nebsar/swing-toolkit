@@ -6,6 +6,7 @@ package ar.com.huargo.swingtoolkit.factory;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.border.Border;
@@ -46,6 +47,10 @@ public class SwingComponentFactory  {
     
     public static Component createVerticalSeparator(){
         return SwingComponentFactory.createVerticalSeparator(SwingComponentFactory.DEFAULT_SEPARATOR);
+    }
+    
+    public static Insets createInset(int size){
+        return new Insets(size, size, size, size);
     }
     
     
