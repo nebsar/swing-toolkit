@@ -6,15 +6,19 @@ package ar.com.huargo.swingtoolkit.form;
 
 import ar.com.huargo.swingtoolkit.GenericWindow;
 import ar.com.huargo.swingtoolkit.factory.SwingComponentFactory;
+import ar.com.huargo.swingtoolkit.util.GridBagLayoutUtil;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -54,14 +58,13 @@ public abstract class GenericFormWindow extends GenericWindow{
     
     protected void createContentPanel(){
         this.contentPanel = new JPanel();
-        
         this.gridBagLayout = new GridBagLayout();
         this.gridBagConstraints = new GridBagConstraints();
-        this.containerPanel.setLayout(this.gridBagLayout);
+        this.contentPanel.setLayout(this.gridBagLayout);
         this.gridBagConstraints.fill = GridBagConstraints.BOTH;
-//        this.gridBagConstraints.weightx = 1.0;
-        
-        
+        this.gridBagConstraints.weightx = 1.0;
+        this.gridBagConstraints.weighty = 1.0;
+        this.gridBagConstraints.insets = SwingComponentFactory.createInset(5);
         this.addComponents();
     }
     
@@ -77,10 +80,7 @@ public abstract class GenericFormWindow extends GenericWindow{
         this.buttonsPanel.add(this.cancelButton);
         
     }
-    
-    protected LayoutManager getContentPanelLayout(){
-        return new GridLayout(0, 1);
-    }
+
     
     protected abstract void addComponents();
     
@@ -104,6 +104,16 @@ public abstract class GenericFormWindow extends GenericWindow{
                 onConfirm();
             }
         });
+    }
+    
+    
+    protected void addLine(JLabel label, Component component){
+        this.gridBagConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        GridBagLayoutUtil.add(label, this.gridBagLayout, this.gridBagConstraints);
+        this.contentPanel.add(label);
+        this.gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
+        GridBagLayoutUtil.add(component, this.gridBagLayout, this.gridBagConstraints);
+        this.contentPanel.add(component);
     }
     
     
