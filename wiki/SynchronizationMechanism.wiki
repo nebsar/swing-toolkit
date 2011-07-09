@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Swing Toolkit provides a mechanism that allows your windows to synchronize with each other. This means, for example, that you may be rendering a window and, at any given time pause it and open a new window, and resume the rendering of the original window after the user fills this second window (a form or whatever you want).
+Swing Toolkit provides a mechanism that allows your windows to synchronize with each other. This means, for example, that you may be rendering a window and, at any given time, pause it and open a new window, and resume the rendering of the original window after the user fills this second window (a form or whatever you want).
 
 
 = Technical Details =
