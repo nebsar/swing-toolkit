@@ -14,6 +14,7 @@ We don't want to stop loading window A nor to embbed the code of window B inside
 First, B must implement the Synchronizable interface. This interface exposes two methods:
 
 _public void receiveLock(SwingLock lock)_
+
 _public void releaselock()_
 
 We'll explain this interface further on. First let's take a moment an explore the SwingLock class.
