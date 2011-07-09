@@ -12,7 +12,7 @@ As an example let's assume we have a Window A. We begin loading A window and the
 We don't want to stop loading window A nor to embbed the code of window B inside the logic of A. So we need a way to pause A, work with B and the go back to A. That's when our sync mechanism comes in handy.
 
 First, B must implement the Synchronizable interface. This interface exposes two methods:
- _public void receiveLock(SwingLock lock)_
+_public void receiveLock(SwingLock lock)_
 _public void releaselock()_
 
 We'll explain this interface further on. First let's take a moment an explore the SwingLock class.
