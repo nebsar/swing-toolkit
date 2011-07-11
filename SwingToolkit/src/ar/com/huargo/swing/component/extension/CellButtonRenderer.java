@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.com.huargo.swing.component;
+package ar.com.huargo.swing.component.extension;
 
 import java.awt.Component;
 import javax.swing.JButton;
