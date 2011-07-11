@@ -16,7 +16,6 @@ import java.util.List;
 public abstract class AnnotationProcessorImpl implements AnnotationProcessor{
     
         
-    @Override
     public String[] process(Object o) {
         Class clazz = o.getClass();
         List<String> list = new ArrayList<String>();
