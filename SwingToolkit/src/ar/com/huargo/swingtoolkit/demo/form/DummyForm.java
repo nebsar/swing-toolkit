@@ -5,7 +5,7 @@
 package ar.com.huargo.swingtoolkit.demo.form;
 
 import ar.com.huargo.swingtoolkit.form.GenericFormWindow;
-import ar.com.huargo.swingtoolkit.factory.JLabelFactory;
+import ar.com.huargo.swingtoolkit.swing.component.factory.JLabelFactory;
 
 /**
  *

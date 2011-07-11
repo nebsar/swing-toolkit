@@ -5,7 +5,7 @@
 package ar.com.huargo.swingtoolkit.form;
 
 import ar.com.huargo.swingtoolkit.GenericWindow;
-import ar.com.huargo.swingtoolkit.factory.SwingComponentFactory;
+import ar.com.huargo.swingtoolkit.swing.component.factory.SwingComponentFactory;
 import ar.com.huargo.swingtoolkit.util.GridBagLayoutUtil;
 import java.awt.BorderLayout;
 import java.awt.Component;

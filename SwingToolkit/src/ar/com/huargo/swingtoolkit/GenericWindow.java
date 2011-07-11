@@ -4,7 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit;
 
-import ar.com.huargo.swingtoolkit.factory.JPanelFactory;
+import ar.com.huargo.swingtoolkit.swing.component.factory.JPanelFactory;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
