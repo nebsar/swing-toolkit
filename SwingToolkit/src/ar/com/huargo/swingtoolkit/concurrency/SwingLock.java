@@ -77,7 +77,7 @@ public final class SwingLock {
      * 
      * @throws InterruptedException 
      */
-    public synchronized void lock() throws InterruptedException {
+    public synchronized final void lock() throws InterruptedException {
         Thread callingThread = Thread.currentThread();
         while (isLocked && ((lockedBy == null) || (lockedBy != callingThread))) {
             wait();
@@ -92,7 +92,7 @@ public final class SwingLock {
     /**
      * This method is called when a thread wants to release the lock.
      */
-    public synchronized void unlock() {
+    public synchronized final void unlock() {
         if ((this.lockedBy == null) || (Thread.currentThread() == this.lockedBy)) {
             lockedCount--;
             if (lockedCount == 0) {
