@@ -21,19 +21,24 @@ public abstract class AnnotationProcessorImpl implements AnnotationProcessor{
         Class clazz = o.getClass();
         List<String> list = new ArrayList<String>();
         String[] result = null;
-        Field[] fields = clazz.getFields();
+        Field[] fields = clazz.getDeclaredFields();
         for(Field f : fields){
             try{
+                f.setAccessible(true);
                 this.processField(f,o);
             }catch(ValidationFailedException e){
                 list.add(f.getName());
             }
         }
         if(list.size() > 0){
-            result  = (String[])list.toArray();
+            result  = new String[list.size()];
+            int i = 0;
+            for(String name : list){
+                result[i++] = name;
+            }
         }
         return result;
     }
     
-    public abstract void processField(Field f,Object o) throws ValidationFailedException;
+    protected abstract void processField(Field f,Object o) throws ValidationFailedException;
 }
