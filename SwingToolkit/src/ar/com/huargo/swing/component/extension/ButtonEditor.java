@@ -28,12 +28,16 @@ import javax.swing.JTable;
  *
  * @author Augusto Recordon
  * 
+ * @version 1.0 final
  * 
  */
 public class ButtonEditor extends DefaultCellEditor {
 
     /* ************************************************************************/
     
+    /**
+     * JButton being rendered
+     */
     protected JButton button;
     
     /* ************************************************************************/
