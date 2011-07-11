@@ -1,50 +1,106 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package ar.com.huargo.swingtoolkit.concurrency;
 
 /**
  *
- * @author arecordon
+ * @author Augusto Recordon
+ * 
+ * @version 1.0 final
+ * 
  */
-public class SwingLock {
+public final class SwingLock {
+    
+    /* ************************************************************************/
+    
+    /**
+     * This property holds the state of the lock.
+     */
+    private boolean isLocked;
+    
+    /* ************************************************************************/
+    
+    /**
+     * This property holds a reference to the Thread that holds the lock.
+     */
+    private Thread lockedBy;
+    
+    /* ************************************************************************/
+    
+    /**
+     * This property counts how many Thread locked this instance.
+     */
+    private int lockedCount;
 
-  private boolean isLocked;
-  private Thread  lockedBy;
-  private int lockedCount;
-
-  
-  public SwingLock(){
-      this(false);
-  }
-  
-  
-  public SwingLock(boolean locked){
-      super();
-      this.isLocked = locked;
-      this.lockedCount = (locked) ? 1 : 0;
-  }
-  
-  public synchronized void lock() throws InterruptedException{
-    Thread callingThread = Thread.currentThread();
-    while(isLocked && ((lockedBy == null) || (lockedBy != callingThread))){
-      wait();
+    /* ************************************************************************/
+    
+    /**
+     * Default constructor. This creates an unlocked SwingLock.
+     * 
+     */
+    public SwingLock() {
+        this(false);
     }
-    isLocked = true;
-    lockedCount++;
-    lockedBy = callingThread;
-  }
 
-
-  public synchronized void unlock(){
-    if((this.lockedBy == null) || (Thread.currentThread() == this.lockedBy)){
-      lockedCount--;
-      if(lockedCount == 0){
-        isLocked = false;
-        notify();
-      }
+    /* ************************************************************************/
+    
+    /**
+     * This constructor allows the method that instantiates the Lock to determine
+     * if it should be locked automatically.
+     * @param locked 
+     */
+    public SwingLock(boolean locked) {
+        super();
+        this.isLocked = locked;
+        this.lockedCount = (locked) ? 1 : 0;
     }
-  }
 
+    /* ************************************************************************/
+    
+    /**
+     * This method attempts to use the lock. If it fails, then it waits until
+     * other thread releases the Lock.
+     * 
+     * @throws InterruptedException 
+     */
+    public synchronized void lock() throws InterruptedException {
+        Thread callingThread = Thread.currentThread();
+        while (isLocked && ((lockedBy == null) || (lockedBy != callingThread))) {
+            wait();
+        }
+        isLocked = true;
+        lockedCount++;
+        lockedBy = callingThread;
+    }
+    
+    /* ************************************************************************/
+
+    /**
+     * This method is called when a thread wants to release the lock.
+     */
+    public synchronized void unlock() {
+        if ((this.lockedBy == null) || (Thread.currentThread() == this.lockedBy)) {
+            lockedCount--;
+            if (lockedCount == 0) {
+                isLocked = false;
+                notify();
+            }
+        }
+    }
+    
+    /* ************************************************************************/
 }
