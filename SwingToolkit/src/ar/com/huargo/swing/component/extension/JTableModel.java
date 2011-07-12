@@ -34,21 +34,33 @@ import javax.swing.table.TableModel;
 public class JTableModel {
 
     /* ********************************************************************************************************************* */
+  
     private JTable jTable;
+    
     /* ********************************************************************************************************************* */
+    
     private int columnCount;
+    
     /* ********************************************************************************************************************* */
+    
     private int[] editableColumns;
+    
     /* ********************************************************************************************************************* */
+    
     @SuppressWarnings("rawtypes")
     private List data;
+    
     /* ********************************************************************************************************************* */
+    
     private Map<Integer, String[]> modelInfo;
+    
     /* ********************************************************************************************************************* */
+    
     @SuppressWarnings("rawtypes")
     private Class modelClass;
-
+    
     /* ********************************************************************************************************************* */
+
     @SuppressWarnings("rawtypes")
     public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
         super();
@@ -60,6 +72,7 @@ public class JTableModel {
     }
 
     /* ********************************************************************************************************************* */
+    
     public TableModel createTableModel() {
         String[] names = new String[this.columnCount];
         String[] properties = new String[this.columnCount];
@@ -69,7 +82,7 @@ public class JTableModel {
         }
         final String[] columnNames = names;
         final String[] columnProperties = properties;
-        final List<Integer> editableColumns = this.createEditableColumnsList();
+        final List<Integer> editableColumnsList = this.createEditableColumnsList();
 
         return new AbstractTableModel() {
 
@@ -108,7 +121,7 @@ public class JTableModel {
 
             @Override
             public boolean isCellEditable(int row, int col) {
-                return ((editableColumns != null) && (editableColumns.contains(col)));
+                return ((editableColumns != null) && (editableColumnsList.contains(col)));
             }
 
             @SuppressWarnings("unchecked")
@@ -139,10 +152,14 @@ public class JTableModel {
         };
     }
 
-    /* ********************************************************************************************************************* */
+    /* ********************************************************************** */
+    
     public void setJTable(JTable jTable) {
         this.jTable = jTable;
+        this.activateColumnEdition();
     }
+    
+    /* ********************************************************************** */
     
     private final List<Integer> createEditableColumnsList(){
         List<Integer> result = new ArrayList<Integer>();
@@ -151,4 +168,14 @@ public class JTableModel {
         }
         return result;
     }
+    
+    /* ********************************************************************** */
+    
+    private void activateColumnEdition(){
+        for(int i = 0; i < this.editableColumns.length; i++){
+            this.jTable.getColumnModel().getColumn(editableColumns[i]).setCellEditor(new CellEditor(this));
+        } 
+    }
+    
+    /* ********************************************************************** */
 }

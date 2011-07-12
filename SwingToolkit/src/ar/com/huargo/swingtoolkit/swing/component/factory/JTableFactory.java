@@ -40,10 +40,6 @@ public class JTableFactory {
         for (int i = 0; i < result.getColumnCount(); i++) {
             result.getColumnModel().getColumn(i).setPreferredWidth(250);
         }
-        
-        for(int i = 0; i < editableColumns.length; i++){
-            result.getColumnModel().getColumn(editableColumns[i]).setCellEditor(new CellEditor());
-        } 
         return result;
     }
 }
