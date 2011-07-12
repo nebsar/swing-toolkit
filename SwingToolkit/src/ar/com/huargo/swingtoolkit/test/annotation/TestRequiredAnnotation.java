@@ -4,7 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit.test.annotation;
 
-import ar.com.huargo.annotation.annotation.processor.RequiredAnnotationProcessor;
+import ar.com.huargo.annotation.processor.RequiredAnnotationProcessor;
 
 /**
  *
