@@ -1,0 +1,12 @@
+#summary Annotations subsystem description.
+
+= Introduction =
+
+Swing-Toolkit has an Annotations subsystem built-in, as well as the processors required to handle these annotations.
+
+Annotations are primary designed to help GUI validation and constraint values for fields, etc.
+
+
+= Details =
+
+Have in mind that the annotations included in this toolkit are intended to use exclusively in the context of GUI validation. Standard templates include default validators and processors. So all the details of annotations handling are already taken care of.
