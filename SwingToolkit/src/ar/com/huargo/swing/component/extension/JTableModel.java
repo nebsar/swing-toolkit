@@ -178,4 +178,19 @@ public class JTableModel {
     }
     
     /* ********************************************************************** */
+    
+    /**
+     * This method is invoked when a cell in the table has been updated, so it 
+     * can reflect the corresponding modification in the model.
+     * 
+     * @param row
+     * @param column
+     * @param newValue 
+     */
+    public void updateBusinessComponent(int row, int column, Object newValue){
+        Object o = this.jTable.getModel().getValueAt(row, -1);
+    }
+    
+    /* ********************************************************************** */
+    
 }
