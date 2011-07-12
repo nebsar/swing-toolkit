@@ -12,6 +12,7 @@ import ar.com.huargo.annotation.annotation.processor.RequiredAnnotationProcessor
  */
 public class TestRequiredAnnotation {
 
+
     public static void main(String[] args) {
 
         AnnotatedEntity ae = new AnnotatedEntity();
