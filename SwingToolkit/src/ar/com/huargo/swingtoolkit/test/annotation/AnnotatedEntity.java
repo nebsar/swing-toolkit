@@ -4,6 +4,7 @@
  */
 package ar.com.huargo.swingtoolkit.test.annotation;
 
+import ar.com.huargo.annotation.annotation.Length;
 import ar.com.huargo.annotation.annotation.Required;
 
 /**
@@ -17,4 +18,9 @@ public class AnnotatedEntity {
     
     private String notAnnotatedField;
     
+    @Length(min=2,max=4)
+    private String lenghtAnnotated1 = "123";
+    
+    @Length(min=3,max=6)
+    private String lengthAnnotated2 = "12";
 }

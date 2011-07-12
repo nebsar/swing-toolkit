@@ -10,7 +10,7 @@ import ar.com.huargo.annotation.processor.RequiredAnnotationProcessor;
  *
  * @author augusto
  */
-public class TestRequiredAnnotation {
+public class TestAnnotation {
 
 
     public static void main(String[] args) {

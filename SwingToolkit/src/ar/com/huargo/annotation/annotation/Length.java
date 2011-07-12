@@ -17,8 +17,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Length {
     
-    public int min();
+    public int min() default 0;
     
-    public int max();
+    public int max() default 255;
     
 }
