@@ -1,0 +1,154 @@
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.huargo.swing.component.extension;
+
+import ar.com.huargo.reflection.ReflectionUtil;
+import ar.com.huargo.reflection.exception.NoSuchPropertyException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableModel;
+
+/**
+ *
+ * @author Augusto Recordon
+ */
+public class JTableModel {
+
+    /* ********************************************************************************************************************* */
+    private JTable jTable;
+    /* ********************************************************************************************************************* */
+    private int columnCount;
+    /* ********************************************************************************************************************* */
+    private int[] editableColumns;
+    /* ********************************************************************************************************************* */
+    @SuppressWarnings("rawtypes")
+    private List data;
+    /* ********************************************************************************************************************* */
+    private Map<Integer, String[]> modelInfo;
+    /* ********************************************************************************************************************* */
+    @SuppressWarnings("rawtypes")
+    private Class modelClass;
+
+    /* ********************************************************************************************************************* */
+    @SuppressWarnings("rawtypes")
+    public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
+        super();
+        this.modelClass = modelClass;
+        this.modelInfo = modelInfo;
+        this.columnCount = this.modelInfo.keySet().size();
+        this.editableColumns = editableColumns;
+        this.data = new ArrayList();
+    }
+
+    /* ********************************************************************************************************************* */
+    public TableModel createTableModel() {
+        String[] names = new String[this.columnCount];
+        String[] properties = new String[this.columnCount];
+        for (int i = 0; i < this.columnCount; i++) {
+            names[i] = modelInfo.get(i)[0];
+            properties[i] = modelInfo.get(i)[1];
+        }
+        final String[] columnNames = names;
+        final String[] columnProperties = properties;
+        final List<Integer> editableColumns = this.createEditableColumnsList();
+
+        return new AbstractTableModel() {
+
+            private static final long serialVersionUID = -9096131181743204109L;
+
+            public int getRowCount() {
+                return data.size();
+            }
+
+            public int getColumnCount() {
+                return columnCount;
+            }
+
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Object item = data.get(rowIndex);
+                Object result = item;
+                if (columnIndex >= 0) {
+                    try {
+                        result = ReflectionUtil.executeGetter(item, columnProperties[columnIndex]);
+                    } catch (NoSuchPropertyException e) {
+                        result = columnProperties[columnIndex];
+                    }
+                }
+                return result;
+            }
+
+            @Override
+            public void fireTableDataChanged() {
+                super.fireTableDataChanged();
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return columnNames[column];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return ((editableColumns != null) && (editableColumns.contains(col)));
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+
+                TableCellEditor ce = jTable.getCellEditor();
+
+                if (ce != null) {
+                    jTable.getCellEditor().cancelCellEditing();
+                }
+
+                //used to delete all lines
+                if (aValue instanceof Integer) {
+                    if (aValue.equals(-1)) {
+                        data.removeAll(data);
+                        super.fireTableDataChanged();
+                    } else if (aValue.equals(1)) {
+                        data.remove(row);
+                        super.fireTableDataChanged();
+                    }
+                }
+                if (ReflectionUtil.isInstanceOf(modelClass, aValue)) {
+                    data.add(aValue);
+                }
+
+            }
+        };
+    }
+
+    /* ********************************************************************************************************************* */
+    public void setJTable(JTable jTable) {
+        this.jTable = jTable;
+    }
+    
+    private final List<Integer> createEditableColumnsList(){
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i = 0; i < this.editableColumns.length; i++){
+            result.add(this.editableColumns[i]);
+        }
+        return result;
+    }
+}

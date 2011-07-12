@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package ar.com.huargo.swing.component.extension;
 
 import java.awt.Component;
+import javax.sound.midi.SysexMessage;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -31,15 +32,22 @@ import javax.swing.table.TableCellEditor;
 public class CellEditor extends AbstractCellEditor implements TableCellEditor {
 
     private JComponent component = new JTextField();
+    private int column;
+    private int row;
 
     public Object getCellEditorValue() {
-        return ((JTextField) component).getText();
+        return ((JTextField) this.component).getText();
     }
 
-    public Component getTableCellEditorComponent(JTable arg0, Object arg1, boolean arg2, int arg3, int arg4) {
-        JTextField field = (JTextField) component;
-        field.setText(arg1.toString());
+//     Component getTableCellEditorComponent(JTable table, Object value,
+//					  boolean isSelected,
+//					  int row, int column);
+//    public Component getTableCellEditorComponent(JTable arg0, Object arg1, boolean arg2, int arg3, int arg4) {
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        JTextField field = (JTextField) this.component;
+
+        field.setText(value.toString());
         field.selectAll();
-        return component;
+        return this.component;
     }
 }
