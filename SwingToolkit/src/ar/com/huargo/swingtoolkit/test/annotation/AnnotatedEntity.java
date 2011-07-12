@@ -14,7 +14,13 @@ import ar.com.huargo.annotation.annotation.Required;
 public class AnnotatedEntity {
     
     @Required(required=true)
-    private String annotatedField;
+    private String requiredAnnotatedField1;
+    
+    @Required(required=true)
+    private String requiredAnnotatedField2 = "ALGO";
+    
+    @Required(required=false)
+    private String requiredAnnotatedField3;
     
     private String notAnnotatedField;
     
