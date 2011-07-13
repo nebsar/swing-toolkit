@@ -31,7 +31,7 @@ import javax.swing.table.TableModel;
  *
  * @author Augusto Recordon
  */
-public class JTableModel {
+public class JTableModel implements JTableModelContentUpdater{
 
     /* ********************************************************************************************************************* */
   
@@ -60,6 +60,10 @@ public class JTableModel {
     private Class modelClass;
     
     /* ********************************************************************************************************************* */
+    
+    private String[] properties;
+    
+    /* ********************************************************************************************************************* */
 
     @SuppressWarnings("rawtypes")
     public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
@@ -75,7 +79,7 @@ public class JTableModel {
     
     public TableModel createTableModel() {
         String[] names = new String[this.columnCount];
-        String[] properties = new String[this.columnCount];
+        properties = new String[this.columnCount];
         for (int i = 0; i < this.columnCount; i++) {
             names[i] = modelInfo.get(i)[0];
             properties[i] = modelInfo.get(i)[1];
@@ -149,6 +153,7 @@ public class JTableModel {
                 }
 
             }
+     
         };
     }
 
@@ -192,5 +197,16 @@ public class JTableModel {
     }
     
     /* ********************************************************************** */
+
+    /**
+     * This method is added so this class may implement the JTableModelContentUpdater
+     * interface
+     * 
+     */
+    public void cellContentUpdated(int row, int column, String newValue) {
+        Object backingObject = this.jTable.getModel().getValueAt(row, -1);
+        ReflectionUtil.executeSetter(this.properties[column], backingObject, backingObject, this.modelClass);
+    }
+    
     
 }

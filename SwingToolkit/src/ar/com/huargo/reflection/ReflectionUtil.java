@@ -44,14 +44,14 @@ public class ReflectionUtil {
 
         try {
             value = object.getClass().getField(property).get(object);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchFieldException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return value;
