@@ -205,7 +205,7 @@ public class JTableModel implements JTableModelContentUpdater{
      */
     public void cellContentUpdated(int row, int column, String newValue) {
         Object backingObject = this.jTable.getModel().getValueAt(row, -1);
-        ReflectionUtil.executeSetter(this.properties[column], backingObject, backingObject, this.modelClass);
+        ReflectionUtil.executeSetter(this.properties[column], backingObject, newValue, String.class);
     }
     
     
