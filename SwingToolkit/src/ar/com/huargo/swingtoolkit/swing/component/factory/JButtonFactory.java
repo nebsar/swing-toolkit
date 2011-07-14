@@ -4,9 +4,9 @@
  */
 package ar.com.huargo.swingtoolkit.swing.component.factory;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 import javax.swing.JButton;
 
 /**
@@ -23,6 +23,14 @@ public class JButtonFactory {
     
     public static JButton createJButton(String label){
         return new JButton(label);
+    }
+    
+    public static JButton createJButton(int width, int height,Class baseClass,String iconPath, String tooltip){
+        JButton result = new JButton();
+        result.setPreferredSize(new Dimension(height,width));
+        result.setIcon(IconImageFactory.createImageIcon(baseClass, iconPath));
+        result.setToolTipText(tooltip);
+        return result;
     }
     
 }

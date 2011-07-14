@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package ar.com.huargo.reflection;
 
-import ar.com.huargo.reflection.exception.NoSuchPropertyException;
+import ar.com.huargo.exception.reflection.NoSuchPropertyException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package ar.com.huargo.annotation.processor;
 
 import ar.com.huargo.annotation.annotation.Length;
-import ar.com.huargo.annotation.exception.InvalidLengthForFieldException;
-import ar.com.huargo.annotation.exception.ValidationFailedException;
+import ar.com.huargo.exception.annotation.InvalidLengthForFieldException;
+import ar.com.huargo.exception.annotation.ValidationFailedException;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;

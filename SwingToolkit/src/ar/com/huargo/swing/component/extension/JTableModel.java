@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package ar.com.huargo.swing.component.extension;
 
 import ar.com.huargo.reflection.ReflectionUtil;
-import ar.com.huargo.reflection.exception.NoSuchPropertyException;
+import ar.com.huargo.exception.reflection.NoSuchPropertyException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
