@@ -28,43 +28,77 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
 /**
- *
  * @author Augusto Recordon
+ * 
+ * This class represents a JTableModel to be used in a JTable to manage its
+ * content.
+ * 
+ * @version 1.0 stable
  */
 public class JTableModel implements JTableModelContentUpdater{
 
     /* ********************************************************************************************************************* */
   
+    /**
+     * JTable related to this instance.
+     */
     private JTable jTable;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * Number of columns.
+     */
     private int columnCount;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * Array containing the number of the columns that may be 
+     * editables.
+     */
     private int[] editableColumns;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * List of records contained in the table.
+     */
     @SuppressWarnings("rawtypes")
     private List data;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * Auxiliary structure containing data required for configuring
+     * the TableModel properly.
+     */
     private Map<Integer, String[]> modelInfo;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * This object holds a reference to the concrete class whose instances 
+     * will be stored in the table.
+     */
     @SuppressWarnings("rawtypes")
     private Class modelClass;
     
     /* ********************************************************************************************************************* */
     
+    /**
+     * Array of the properties of the objects that are displayed in the table.
+     */
     private String[] properties;
     
     /* ********************************************************************************************************************* */
 
+    /**
+     * 
+     * @param modelClass
+     * @param modelInfo
+     * @param editableColumns 
+     */
     @SuppressWarnings("rawtypes")
     public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
         super();
@@ -77,6 +111,13 @@ public class JTableModel implements JTableModelContentUpdater{
 
     /* ********************************************************************************************************************* */
     
+    /**
+     * This method creates a new instance of TableModel based on the
+     * configuration made previously.
+     * 
+     * @return a new instance of table model, properly configured, according
+     * to the configuration established.
+     */
     public TableModel createTableModel() {
         String[] names = new String[this.columnCount];
         properties = new String[this.columnCount];

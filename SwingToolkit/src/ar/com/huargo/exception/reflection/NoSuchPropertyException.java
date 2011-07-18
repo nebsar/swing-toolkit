@@ -20,6 +20,11 @@ package ar.com.huargo.exception.reflection;
 /**
  *
  * @author Augusto Recordon
+ * 
+ * This exception is useful for signaling where a property
+ * tried to be accessed via reflection is not found.
+ * 
+ * @version 1.0 final
  */
 public class NoSuchPropertyException extends RuntimeException{
 

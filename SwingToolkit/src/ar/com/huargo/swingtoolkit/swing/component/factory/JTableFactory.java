@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package ar.com.huargo.swingtoolkit.swing.component.factory;
 
-import ar.com.huargo.swing.component.extension.CellEditor;
 import ar.com.huargo.swing.component.extension.JTableModel;
 import java.util.Map;
 import javax.swing.JTable;
