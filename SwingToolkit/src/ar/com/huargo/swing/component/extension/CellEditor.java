@@ -76,7 +76,6 @@ public class CellEditor extends AbstractCellEditor implements TableCellEditor {
      */
     public Object getCellEditorValue() {
         String newValue = ((JTextField) this.component).getText();
-        System.out.println("Nuevo valor--->"+newValue);
         this.tableModel.cellContentUpdated(this.row, this.column, newValue);
         return newValue;
     }

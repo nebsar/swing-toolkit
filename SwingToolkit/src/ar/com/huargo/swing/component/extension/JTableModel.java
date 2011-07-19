@@ -249,5 +249,4 @@ public class JTableModel implements JTableModelContentUpdater{
         ReflectionUtil.executeSetter(this.properties[column], backingObject, newValue, String.class);
     }
     
-    
 }
