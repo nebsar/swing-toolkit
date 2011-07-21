@@ -25,12 +25,29 @@ import java.lang.annotation.Target;
 /**
  *
  * @author Augusto Recordon
+ * 
+ * This annotation adds support for limiting the possible values
+ * for an intenger property.
+ * 
+ * @version  1.0 final
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface IntValue {
     
+    /**
+     * This value can be set to establish te minimum value for the 
+     * annotated field.
+     * 
+     * @return 
+     */
     public int min() default Integer.MIN_VALUE;
     
+    /**
+     * This value will establish the maximum value accepted for the annotated
+     * field.
+     * 
+     * @return 
+     */
     public int max() default Integer.MAX_VALUE;
 }

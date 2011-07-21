@@ -27,6 +27,8 @@ import java.lang.annotation.Target;
  * 
  * This annotation should be used to signal the current validators as a 
  * required field.
+ * 
+ * @version 1.0 final
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

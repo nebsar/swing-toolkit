@@ -25,13 +25,25 @@ import java.lang.annotation.Target;
 /**
  *
  * @author Augusto Recordon
+ * 
+ * This annotation allows the programmer to specify the minimum and/or
+ * maximum length for a String property.
+ * 
+ * @version 1.0 final
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Length {
     
+    /**
+     * This value sets the minimum required length for a String property.
+     */
     public int min() default 0;
     
+    /**
+     * This value establish the maximum length allowed for a given 
+     * String property.
+     */
     public int max() default 255;
     
 }
