@@ -20,6 +20,14 @@ package ar.com.huargo.exception.annotation;
 /**
  *
  * @author Augusto Recordon
+ * 
+ * This RuntimeException is thrown when the Processor for Required Annotation
+ * detects a null property on a non-null field.
+ * 
+ * @see RequiredAnnotationProcessor
+ * @see Required
+ * 
+ * @version 1.0 final
  */
 public class EmptyInputForRequiredFieldException extends ValidationFailedException {
     

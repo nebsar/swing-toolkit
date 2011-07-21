@@ -20,6 +20,14 @@ package ar.com.huargo.exception.annotation;
 /**
  *
  * @author Augusto Recordon
+ * 
+ * This exception is raised by the intValue Annotation Processor detects an
+ * Integer out of the established range.
+ * 
+ * @see IntValueAnnotationProcessorException
+ * @see IntValue
+ * 
+ * @version 1.0 final
  */
 public class InvalidIntegerRangeException extends ValidationFailedException{
     
