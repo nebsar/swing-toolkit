@@ -22,7 +22,7 @@ package ar.com.huargo.concurrency;
  * 
  * @version  1.0 final
  * 
- * This interface provides a allows to a thread to implement a mechanism for an
+ * This interface allows a thread to implement a mechanism for an
  * effective communication with a SwingSynchronizer instance.
  * 
  * @see  SwingSynchronizer

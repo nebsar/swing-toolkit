@@ -20,6 +20,9 @@ package ar.com.huargo.concurrency;
  *
  * @author Augusto Recordon
  * 
+ * This is an implementation of a basic concurrency lock. It provides 
+ * typical operations of lock and unlock to handle the lock.
+ * 
  * @version 1.0 final
  * 
  */

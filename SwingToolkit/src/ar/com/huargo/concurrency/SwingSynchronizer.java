@@ -19,9 +19,17 @@ package ar.com.huargo.concurrency;
 /**
  * @author Augusto Recordon
  * 
- * @version  1.0 final
- * 
  * This class allows two threads to synchronize with each other.
+ * In order the mechanism to work, the first window must call the
+ * synchronizeWith method with a reference to a second window, the one it wants
+ * to synchronize with. This will make the corresponding thread to synchronize.
+ * 
+ * Have in mind that this only a kind of barrier synchronization mechanism.
+ * Version 1.0 doesn't provide a way for communication, so if one thread must
+ * make calls on the second windows (and viceversa), that logic must be implemented
+ * in the windows' logic.
+ * 
+ * @version  1.0 final
  */
 public final class SwingSynchronizer {
     

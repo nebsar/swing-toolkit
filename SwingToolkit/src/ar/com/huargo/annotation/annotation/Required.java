@@ -33,8 +33,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Required {
+    
     /**
-     * 
      * @return true: the field is required. false otherwise.
      */
     public boolean required() default false;
