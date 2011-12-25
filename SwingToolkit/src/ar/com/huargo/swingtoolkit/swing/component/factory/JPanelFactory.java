@@ -17,8 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package ar.com.huargo.swingtoolkit.swing.component.factory;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.LayoutManager;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  * @author Augusto Recordon
@@ -51,6 +53,60 @@ public class JPanelFactory {
     public static JPanel createJPanel(LayoutManager layoutManager){
         return new JPanel(layoutManager);
     }
+    
+    /* ********************************************************************** */
+    
+    
+    /**
+     * This method instanciates an object of the JTabbedPane and
+     * set its TabLayoutPolicy to JTabbedPane.WRAP_TAB_LAYOUT.
+     * 
+     * @return 
+     */
+    public static JTabbedPane createJTabbedPane(){
+        JTabbedPane aTabbedPane = new JTabbedPane();
+        aTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        
+        return aTabbedPane;
+    }
+    
+    
+    /* ********************************************************************** */
+    
+    /**
+     * This method creates a new JPanel (using the starndard
+     * method of this very class) and sets its preferredSize attribute
+     * according to the parameters received.
+     * 
+     * @param width
+     * @param height
+     * @return 
+     */
+    public static JPanel createJPanel(int width, int height){
+        JPanel aPanel = JPanelFactory.createJPanel();
+        aPanel.setPreferredSize(new Dimension(width,height));
+        
+        return aPanel;
+    }
+    
+    
+    
+    /* ********************************************************************** */
+    
+    /**
+     * 
+     * @param layoutManager
+     * @param width
+     * @param height
+     * @return 
+     */
+    public static JPanel createJPanel(LayoutManager layoutManager, int width, int height){
+        JPanel aPanel = JPanelFactory.createJPanel(layoutManager);
+        aPanel.setPreferredSize(new Dimension(width,height));
+        
+        return aPanel;
+    }
+    
     
     /* ********************************************************************** */
 }
