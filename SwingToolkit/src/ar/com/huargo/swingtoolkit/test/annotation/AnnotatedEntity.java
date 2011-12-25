@@ -25,7 +25,7 @@ public class AnnotatedEntity {
     private String notAnnotatedField;
     
     @Length(min=2,max=4)
-    private String lenghtAnnotated1 = "123";
+    private String lenghtAnnotated1 = "1232";
     
     @Length(min=3,max=6)
     private String lengthAnnotated2 = "12";

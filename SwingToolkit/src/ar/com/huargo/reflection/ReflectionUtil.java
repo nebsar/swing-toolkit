@@ -22,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -189,5 +190,21 @@ public class ReflectionUtil {
             result = oClass.equals(clazz);
         }
         return result;
+    }
+    
+    public static Class getGetterReturnClass(Class clazz, String propertyName){
+        try {
+            Method m = clazz.getMethod( new StringBuffer("get").append(propertyName.substring(0, 1).toUpperCase()).append(propertyName.substring(1)).toString());
+            return m.getReturnType();
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(ReflectionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static void main(String[] args){
+        System.out.println(ReflectionUtil.getGetterReturnClass(ArrayList.class, "size"));
     }
 }

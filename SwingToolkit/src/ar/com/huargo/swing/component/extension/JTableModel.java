@@ -19,10 +19,12 @@ package ar.com.huargo.swing.component.extension;
 
 import ar.com.huargo.reflection.ReflectionUtil;
 import ar.com.huargo.exception.reflection.NoSuchPropertyException;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JTable;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
@@ -91,6 +93,8 @@ public class JTableModel implements JTableModelContentUpdater{
      */
     private String[] properties;
     
+    private ActionListener actionListener;
+    
     /* ********************************************************************************************************************* */
 
     /**
@@ -100,13 +104,14 @@ public class JTableModel implements JTableModelContentUpdater{
      * @param editableColumns 
      */
     @SuppressWarnings("rawtypes")
-    public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
+    public JTableModel(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns, ActionListener actionListener) {
         super();
         this.modelClass = modelClass;
         this.modelInfo = modelInfo;
         this.columnCount = this.modelInfo.keySet().size();
         this.editableColumns = editableColumns;
         this.data = new ArrayList();
+        this.actionListener = actionListener;
     }
 
     /* ********************************************************************************************************************* */
@@ -153,6 +158,11 @@ public class JTableModel implements JTableModelContentUpdater{
                 }
                 return result;
             }
+//            
+//            @Override
+//            public Class getColumnClass(int colIndex){
+//                return data.get(colIndex).getClass();
+//            }
 
             @Override
             public void fireTableDataChanged() {
@@ -219,7 +229,19 @@ public class JTableModel implements JTableModelContentUpdater{
     
     private void activateColumnEdition(){
         for(int i = 0; i < this.editableColumns.length; i++){
-            this.jTable.getColumnModel().getColumn(editableColumns[i]).setCellEditor(new CellEditor(this));
+            boolean isBoolean = false;
+            Class getterClass = ReflectionUtil.getGetterReturnClass(this.modelClass, this.properties[i]);
+            if(getterClass != null){
+                isBoolean = getterClass.equals(Boolean.class);
+            }
+            if(isBoolean){
+                this.jTable.getColumnModel().getColumn(editableColumns[i]).setCellEditor(new CheckBoxCellEditor(this,this.actionListener));
+                this.jTable.getColumnModel().getColumn(editableColumns[i]).setCellRenderer(new CWCheckBoxRenderer());
+            }else{
+                this.jTable.getColumnModel().getColumn(editableColumns[i]).setCellEditor(new CellEditor(this));    
+            }
+                
+            
         } 
     }
     
@@ -244,9 +266,10 @@ public class JTableModel implements JTableModelContentUpdater{
      * interface
      * 
      */
-    public void cellContentUpdated(int row, int column, String newValue) {
+    public void cellContentUpdated(int row, int column, Object newValue) {
         Object backingObject = this.jTable.getModel().getValueAt(row, -1);
-        ReflectionUtil.executeSetter(this.properties[column], backingObject, newValue, String.class);
+        ReflectionUtil.executeSetter(this.properties[column], backingObject, newValue, newValue.getClass());
     }
     
+
 }

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package ar.com.huargo.swingtoolkit.swing.component.factory;
 
 import ar.com.huargo.swing.component.extension.JTableModel;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.JTable;
 
@@ -28,8 +29,8 @@ import javax.swing.JTable;
 public class JTableFactory {
 
     @SuppressWarnings("rawtypes")
-    public static JTable createJTable(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
-        JTableModel jtModel = new JTableModel(modelClass, modelInfo, editableColumns);
+    public static JTable createJTable(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns,ActionListener actionListener) {
+        JTableModel jtModel = new JTableModel(modelClass, modelInfo, editableColumns,actionListener);
         JTable result = new JTable(jtModel.createTableModel());
         jtModel.setJTable(result);
         result.setRowHeight(25);
@@ -40,5 +41,10 @@ public class JTableFactory {
             result.getColumnModel().getColumn(i).setPreferredWidth(250);
         }
         return result;
+    }
+    
+    @SuppressWarnings("rawtypes")
+    public static JTable createJTable(Class modelClass, Map<Integer, String[]> modelInfo, int[] editableColumns) {
+        return JTableFactory.createJTable(modelClass, modelInfo, editableColumns,null);
     }
 }

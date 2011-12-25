@@ -32,6 +32,6 @@ package ar.com.huargo.swing.component.extension;
  */
 public interface JTableModelContentUpdater {
     
-    public void cellContentUpdated(int row, int column, String newValue);
+    public void cellContentUpdated(int row, int column, Object newValue);
     
 }
