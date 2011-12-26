@@ -18,7 +18,9 @@ package ar.com.huargo.swingtoolkit.swing.component.factory;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -106,6 +108,52 @@ public class JPanelFactory {
         
         return aPanel;
     }
+    
+    
+    /* ********************************************************************** */
+    
+    /**
+     * This method creates and returns a new instance of JPanel with the
+     * preferredSize attribute setted to the values received. It also 
+     * configures the panel, adding a titleBorder to it (with the title
+     * specified).
+     * 
+     * @param width
+     * @param height
+     * @param title
+     * @return 
+     */
+    public static JPanel createJPanel(int width, int height, String borderTitle){
+        JPanel aPanel = JPanelFactory.createJPanel(new FlowLayout(), width, height);
+        aPanel.setBorder(BorderFactory.createTitledBorder(borderTitle));
+        
+        return aPanel;
+    }
+    
+    /* ********************************************************************** */
+    
+    /**
+     * 
+     * This method will return an instance of JPanel width the preferredSize,
+     * layout manager specified. It also will create a titledBorder for the
+     * panel and set its title according to the string literal received.
+     * 
+     * 
+     * @param layoutManager
+     * @param width
+     * @param height
+     * @param borderTitle
+     * @return 
+     */
+    public static JPanel createJPanel(LayoutManager layoutManager, int width, int height, String borderTitle){
+        JPanel aPanel = JPanelFactory.createJPanel(width, height, borderTitle);
+        aPanel.setLayout(layoutManager);
+        
+        return aPanel;
+    }
+    
+    /* ********************************************************************** */
+    
     
     
     /* ********************************************************************** */
