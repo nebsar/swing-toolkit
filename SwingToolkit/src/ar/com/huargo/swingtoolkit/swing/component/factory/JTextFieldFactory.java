@@ -32,6 +32,9 @@ import javax.swing.JTextField;
  */
 public class JTextFieldFactory {
     
+    
+    /* ********************************************************************** */
+    
     /**
      * 
      * 
@@ -48,4 +51,24 @@ public class JTextFieldFactory {
         return jTextField;
     }
     
+    
+    /* ********************************************************************** */
+
+    /**
+     * 
+     * This simple method wraps a standard constructor of the JTextField class, 
+     * so the user need only to rely on this toolkit for working with swing components.
+     * 
+     * @param columns
+     * @return 
+     */
+    public static JTextField createJTextField(int columns){
+        return new JTextField(columns);
+    }
+    
+    
+    /* ********************************************************************** */
+    
+    
+    /* ********************************************************************** */
 }

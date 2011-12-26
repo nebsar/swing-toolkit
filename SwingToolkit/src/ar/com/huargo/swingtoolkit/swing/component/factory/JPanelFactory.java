@@ -27,7 +27,7 @@ import javax.swing.JTabbedPane;
 /**
  * @author Augusto Recordon
  * 
- * This class is a factory for creating custom JPanels.
+ * This class is a factory for creating customized JPanels.
  */
 public class JPanelFactory {
 
@@ -96,6 +96,9 @@ public class JPanelFactory {
     /* ********************************************************************** */
     
     /**
+     * 
+     * This method returns a new JPanel width the preferredSize and layoutManager
+     * received as arguments.
      * 
      * @param layoutManager
      * @param width
