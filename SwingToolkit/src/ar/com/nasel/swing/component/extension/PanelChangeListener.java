@@ -20,11 +20,25 @@ package ar.com.nasel.swing.component.extension;
 /**
  *
  * @author Augusto Recordon
+ * @version 1.0
+ * 
+ * This interface establish the methods that any
+ * implementation of PanelChangeListener must override.
+ * 
  */
 public interface PanelChangeListener {
-    
+   
+    /**
+     * This method implements what to do when
+     * the given tab gains focus.
+     */
     public void focusGained();
     
+    
+    /**
+     * This method performs additional operations
+     * each time the tab loses focus.
+     */
     public void focusLost();
     
 }

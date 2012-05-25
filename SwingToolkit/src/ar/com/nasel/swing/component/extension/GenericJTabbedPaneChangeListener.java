@@ -24,21 +24,44 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- *
  * @author Augusto Recordon
+ * 
+ * This class implements ChangeListener interface, so it provides an
+ * implementation for stateChanged method.
+ * 
+ * @see ChangeListener
  */
 public class GenericJTabbedPaneChangeListener implements ChangeListener{
     
+    /**
+     * This should be the JTabbedPane instance asociated with this change listener.
+     */
     protected JTabbedPane tabbedPane;
     
+    /**
+     * This map contains a tab index and a PanelChangeListener implementation
+     * to handle focus gain and loss on that tab.
+     * @see PanelChangeListener
+     */
     protected Map<Integer,PanelChangeListener> panelListeners;
     
     
+    /**
+     * @param tabbedPane 
+     * 
+     * This is the default constructor for this class. It receives
+     * the JTabbedPane instance associated with it.
+     */
     public GenericJTabbedPaneChangeListener(JTabbedPane tabbedPane){
         super();
         this.tabbedPane = tabbedPane;
     }
     
+    /**
+     * 
+     * @param tabbedPane
+     * @param panelListeners 
+     */
     public GenericJTabbedPaneChangeListener(JTabbedPane tabbedPane, Map<Integer,PanelChangeListener> panelListeners){
         this(tabbedPane);
         this.panelListeners = panelListeners;
