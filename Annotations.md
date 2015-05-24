@@ -1,0 +1,371 @@
+# Introduction #
+
+Swing-Toolkit has an Annotations subsystem built-in, as well as the processors required to handle them.
+
+Annotations, in this context, are primarily designed to help GUI validation and to constraint values for fields, etc.
+
+
+# Details #
+
+Have in mind that the annotations included in this toolkit are intended to be used in the context of GUI validation exclusively. Standard templates include default validators and processors. So all the details of annotations handling are already taken care of.
+
+## Exaples ##
+
+### IntValue Annotation ###
+
+
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.nasel.annotation.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ *
+ * @author Augusto Recordon
+ * 
+ * This annotation adds support for limiting the possible values
+ * for an intenger property.
+ * 
+ * @version  1.0 final
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface IntValue {
+    
+    /**
+     * This value can be set to establish te minimum value for the 
+     * annotated field.
+     * 
+     * @return 
+     */
+    public int min() default Integer.MIN_VALUE;
+    
+    /**
+     * This value will establish the maximum value accepted for the annotated
+     * field.
+     * 
+     * @return 
+     */
+    public int max() default Integer.MAX_VALUE;
+}
+
+```
+
+### Length Annotation ###
+
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.nasel.annotation.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ *
+ * @author Augusto Recordon
+ * 
+ * This annotation allows the programmer to specify the minimum and/or
+ * maximum length for a String property.
+ * 
+ * @version 1.0 final
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Length {
+    
+    /**
+     * This value sets the minimum required length for a String property.
+     */
+    public int min() default 0;
+    
+    /**
+     * This value establish the maximum length allowed for a given 
+     * String property.
+     */
+    public int max() default 255;
+    
+}
+
+```
+
+### Required Annotation ###
+
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package ar.com.nasel.annotation.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ *
+ * @author Augusto Recordon
+ * 
+ * This annotation should be used to signal the current validators as a 
+ * required field.
+ * 
+ * @version 1.0 final
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Required {
+    
+    /**
+     * @return true: the field is required. false otherwise.
+     */
+    public boolean required() default false;
+    
+    
+    
+}
+```
+
+### RequiredAnnotationProcessor ###
+
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.nasel.annotation.processor;
+
+import ar.com.nasel.annotation.annotation.Required;
+import ar.com.nasel.exception.annotation.EmptyInputForRequiredFieldException;
+import ar.com.nasel.exception.annotation.ValidationFailedException;
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Augusto Recordon
+ */
+public class RequiredAnnotationProcessor extends AnnotationProcessorImpl {
+
+    @Override
+    protected void processField(Field f, Object o) throws ValidationFailedException {
+        Required ann = f.getAnnotation(Required.class);
+        if ((ann != null) && (ann.required())) {
+            try {
+
+                if (f.get(o) == null) {
+                    throw new EmptyInputForRequiredFieldException();
+                }
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(RequiredAnnotationProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(RequiredAnnotationProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}
+```
+
+## Testing Annotations ##
+
+The following example allows us to test annotations and see them in action.
+
+### Annotated Entity ###
+
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.nasel.swingtoolkit.test.annotation;
+
+import ar.com.nasel.annotation.annotation.Length;
+import ar.com.nasel.annotation.annotation.Required;
+
+/**
+ *
+ * @author Augusto Recordon
+ * 
+ * This class is an example of an entity using the Swing-Toolkit annotation
+ * system.
+ * 
+ * @version  1.0 final
+ */
+public class AnnotatedEntity {
+    
+    /**
+     * This field is required to have a value, but no value
+     * is given.
+     */
+    @Required(required=true)
+    private String requiredAnnotatedField1;
+    
+    
+    /**
+     * This field is required and has a default value. 
+     */
+    @Required(required=true)
+    private String requiredAnnotatedField2 = "Something";
+    
+    
+    /**
+     * This field is specified as not required and not value
+     * is assigned to it.
+     */
+    @Required(required=false)
+    private String requiredAnnotatedField3;
+    
+    
+    /**
+     * This is a simple property (not annotated).
+     */
+    private String notAnnotatedField;
+    
+    /**
+     * This field length should be between 2 and 4 characters.
+     */
+    @Length(min=2,max=4)
+    private String lenghtAnnotated1 = "1232";
+    
+    /**
+     * This field length is required to be between 3 and 6, but its
+     * value has a length of 2.
+     */
+    @Length(min=3,max=6)
+    private String lengthAnnotated2 = "12";
+}
+```
+
+### Test Annotation ###
+```
+/**
+Copyright (C) 2011  Augusto Recordon
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package ar.com.nasel.swingtoolkit.test.annotation;
+
+import ar.com.nasel.annotation.processor.LengthAnnotationProcessor;
+import ar.com.nasel.annotation.processor.RequiredAnnotationProcessor;
+
+/**
+ *
+ * @author Augusto Recordon
+ */
+public class TestAnnotation {
+
+
+    public static void main(String[] args) {
+
+        System.out.println("--- Starting REQUIRED annotation process ---");
+        AnnotatedEntity ae = new AnnotatedEntity();
+        RequiredAnnotationProcessor rap = new RequiredAnnotationProcessor();
+        String[] fieldsRequiredException = rap.process(ae);
+        if (fieldsRequiredException != null) {
+            for (String fname : fieldsRequiredException) {
+                System.out.println(fname);
+            }
+        }
+        System.out.println("--- REQUIRED annotation process finished ---");
+        
+        System.out.println("--- Starting LENGTH annotation process---");
+        LengthAnnotationProcessor lap = new LengthAnnotationProcessor();
+        String[] fieldsLengthException = lap.process(ae);
+        if (fieldsLengthException != null) {
+            for (String fname : fieldsLengthException) {
+                System.out.println(fname);
+            }
+        }
+        System.out.println("--- LENGTH annotation process finished ---");
+    }
+}
+
+```

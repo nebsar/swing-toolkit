@@ -1,0 +1,18 @@
+# Introduction #
+
+Swing Toolkit provides a mechanism that allows your windows to synchronize with each other. This means, for example, that you may be rendering a window and, at any given time, pause it and open a new window, and resume the rendering of the original window after the user fills this second window (a form or whatever you want).
+
+
+# Technical Details #
+
+As an example let's assume we have a window A. We begin loading this first window and then we realize we must open a second window (B), a form, so the user can fill in some info we need to process window A.
+
+We don't want to stop loading window A nor to embbed the code of window B inside the logic of A. So we need a way to pause A, work with B and then go back to A. That's when our sync mechanism comes in handy.
+
+First, B must implement the Synchronizable interface. This interface exposes two methods:
+
+_public void receiveLock(SwingLock lock)_
+
+_public void releaselock()_
+
+We'll explain this interface further on. First let's take a moment an explore the SwingLock class.

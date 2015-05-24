@@ -1,0 +1,12 @@
+# Introduction #
+
+
+SwingToolkit is a small framework, or toolkit, designed to help Java developers to handle Swing Windows, through a serie of classes, templates, that provide an out of the box solution for easy creation of forms and windows, panels, etc.
+
+Source code is bundled with test and dummy classes, so you can play around a little and learn how the toolkit works, and discover many posibilities.
+
+The main usage of this toolkit should be by subclassifying the templates included, but there's also a generic window that can be configurable, so you can create dynamic windows, based on any criteria you want. This second option is specially atractive if you're planning to build a window engine and you want to avoid the cumbersome of writing a lot of Java code for creating windows.
+
+# Requirements #
+
+No special framework or library has been added to the project. That means this toolkit has been written with pure J2SE standard code, and that it is compatible with any version of the JDK that includes common Swing and AWT widgets.
